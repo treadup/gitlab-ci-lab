@@ -1,0 +1,7 @@
+image: python:3.6
+
+reflect:
+  script:
+    - whoami
+    - pwd
+    - printenv

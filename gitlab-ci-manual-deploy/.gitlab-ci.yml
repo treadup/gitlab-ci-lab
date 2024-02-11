@@ -1,0 +1,45 @@
+image: python:latest
+
+stages:
+  - build
+  - test
+  - deploy
+
+# The only thing the build stage does is print a message.
+# Replace this with code that actually builds the project.
+build:
+  stage: build
+  script: echo Building project
+
+# The only thing the test stage does is print a message.
+# Replace this with code that runs the tests for the project.
+unit_tests:
+  stage: test
+  script: echo Running unit tests
+
+# Deploy to the staging environment.
+# Replace this with code that actually deploys to the staging
+# environment.
+deploy_stage:
+  stage: deploy
+  script: echo Deploying the project to the staging environment
+  environment:
+    name: staging
+    url: https://staging.example.com/
+  only:
+    - master
+
+# Deploy to the production environment.
+# To run this job you have to manually click a button in the GitLab
+# user interface.
+# Replace this with code that actually deploys to the production
+# environment.
+deploy_production:
+  stage: deploy
+  script: echo Deploy the project to the production environment
+  environment:
+    name: production
+    url: https://production.example.com
+  when: manual
+  only:
+    - master

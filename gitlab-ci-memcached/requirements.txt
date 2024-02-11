@@ -1,0 +1,2 @@
+python-memcached==1.58
+pytest==4.3.0

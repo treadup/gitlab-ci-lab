@@ -1,0 +1,14 @@
+image: node:8.15.0
+
+before_script:
+  - npm install -g yarn
+  - yarn install
+
+format:
+  script: yarn run format
+
+lint:
+  script: yarn run lint
+
+test:
+  script: yarn run test

@@ -1,0 +1,19 @@
+image: python:3.7
+
+services:
+  - postgres:latest
+
+variables:
+  POSTGRES_DB: places
+  POSTGRES_USER: traveler
+  POSTGRES_PASSWORD: ticket
+
+before_script:
+  - pip3 install -r requirements.txt
+  - python3 create_db.py
+
+test:
+  script: pytest
+
+
+

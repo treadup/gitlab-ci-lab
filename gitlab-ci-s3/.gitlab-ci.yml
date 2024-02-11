@@ -1,0 +1,16 @@
+image: python:3.7
+
+services:
+  - name: minio/minio:latest
+    alias: minio
+    command: ["server", "/data"]
+
+variables:
+  MINIO_ACCESS_KEY: accesskey
+  MINIO_SECRET_KEY: secretkey
+
+before_script:
+  - pip3 install -r requirements.txt
+
+test:
+  script: python3 test_s3_access.py

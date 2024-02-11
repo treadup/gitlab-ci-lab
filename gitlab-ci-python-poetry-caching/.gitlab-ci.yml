@@ -1,0 +1,24 @@
+image: python:3.6
+
+variables:
+  # Change pip's cache directory to be inside the project directory
+  # since we can only cache local items.
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+cache:
+  # Use the same cache for all pipelines
+  # https://docs.gitlab.com/ee/ci/caching
+  key: one-key-to-rule-them-all
+  paths:
+    - .cache/pip
+    - .venv/
+
+before_script:
+  - curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+  - export PATH=$HOME/.poetry/bin:$PATH
+  - poetry config settings.virtualenvs.in-project true
+  - poetry install
+
+app:
+  # The app.py script has the python pendulum library as a dependency.
+  script: poetry run python app.py

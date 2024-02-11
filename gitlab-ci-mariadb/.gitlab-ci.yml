@@ -1,0 +1,31 @@
+image: python:3.7
+
+variables:
+  MYSQL_ROOT_PASSWORD: verysecret
+  MYSQL_DATABASE: places
+  MYSQL_USER: traveler
+  MYSQL_PASSWORD: ticket
+
+services:
+  - mariadb:latest
+
+connectdb:
+  image: mariadb:latest
+  script:
+    - echo Connecting to database with user root
+    - mysql -hmariadb -uroot -p$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE
+    - echo Successfully connected to database as root user
+    - echo Connecting to database with normal user
+    - mysql -hmariadb -u$MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE
+    - echo Successfully connected to database as normal user
+
+test:
+  image: python:3.7
+  script:
+    - echo Installing requirements
+    - pip3 install -r requirements.txt
+    - echo Creating database
+    - python3 create_db.py
+    - echo Running mariadb database integration tests
+    - pytest
+    - echo Finished running databae integration tests

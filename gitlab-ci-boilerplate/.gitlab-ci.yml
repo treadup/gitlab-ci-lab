@@ -1,0 +1,13 @@
+image: python:3.7
+
+before_script:
+  - pip3 install -r dev-requirements.txt
+
+format:
+  script: black --check .
+
+lint:
+  script: pylint app.py
+
+test:
+  script: pytest
